@@ -1,34 +1,34 @@
 // Type definitions for uikit 2.27
-// Project: http://getuikit.org
+// Project: https://getuikit.com
 // Definitions by: Giovanni Silva <https://github.com/giovannicandido>, Ivo Senner <https://github.com/s0x>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 
 // Type definitions for uikit 3.0.0-beta.21
 // Definitions by: Talalaev Mikhail <https://github.com/talalaev>
 
-
-/// <reference types="jquery" />
-
 declare namespace UIkit {
     interface DropdownElement {
         /**
-         * Show the dropdown
+         * Shows the Dropdown.
+         * @param {object} toggle
+         * @param {boolean} delay
          */
-        show(): void;
+        show(toggle?: object, delay?: boolean): void;
         /**
-         * Hide the dropdown
-         * @param {boolean} force
+         * Hides the Dropdown.
+         * @param {boolean} delay
          */
-        hide(force?: boolean): void;
+        hide(delay?: boolean): void;
     }
     type DropdownPosition =
         'bottom-left' |
         'bottom-center' |
         'bottom-right' |
+        'bottom-justify' |
         'top-left' |
         'top-center' |
         'top-right' |
+        'top-justify' |
         'left-top' |
         'left-center' |
         'left-bottom' |
@@ -37,208 +37,195 @@ declare namespace UIkit {
         'right-bottom';
     interface DropdownOptions {
         /**
-         * Dropdown position
+         * CSS selector for the element to be used as toggle. By default, the preceding element is used.
+         * @default '- *'
+         */
+        toggle?: string | boolean;
+        /**
+         * The position of the dropdown.
          * @default 'bottom-left'
          */
         pos?: DropdownPosition;
         /**
-         * Dropdown trigger behaviour
-         * @default 'hover'
+         * Comma separated list of dropdown trigger behaviour modes: hover, click
+         * @default 'click, hover'
          */
-        mode?: 'hover'|'click';
+        mode?: 'hover'|'click'|'click, hover'|'hover, click';
         /**
-         * Remain time before auto closing dropdown in hover mode
-         * @default 800
-         */
-        remaintime?: number;
-        /**
-         * Stretch dropdown width to a specified element
-         * @default false
-         */
-        justify?: string|JQuery|false;
-        /**
-         * Referenced element to keep dropdowns visibilty
-         * @default window
-         */
-        boundary?: string|JQuery|Window;
-        /**
-         * Delay time in hover mode before a dropdown is shown in ms
+         * Delay time in milliseconds before a dropdown is displayed in hover mode.
          * @default 0
          */
-        delay?: number;
+        delayShow?: number;
         /**
-         * Dropdown selector
-         * @default '.uk-dropdown,.uk-dropdown-blank'
+         * Delay time in milliseconds before a dropdown is hidden in hover mode.
+         * @default 800
          */
-        dropdownSelector?: string|JQuery;
+        delayHide?: number;
         /**
-         * Is added to the delay time when hovering from one active dropdown to another dropdown (in ms)
-         * @default 250
+         * CSS selector of the element to maintain the drop's visibility.
+         * @default 'window'
          */
-        hoverDelayIdle?: number;
+        boundary?: string;
         /**
-         * Prevent automatic dropdown flip
-         * Possible values: 'x', 'y', true, false
+         * Align the dropdown to its boundary.
          * @default false
          */
-        preventflip?: 'x'|'y'|boolean;
+        boundaryAlign?: boolean;
+        /**
+         * Automatically flip the drop. Possible values are false, true, x or y.
+         * @default true
+         */
+        flip?: boolean | string;
+        /**
+         * The offset of the dropdown's container.
+         * @default 0
+         */
+        offset?: number;
+        /**
+         * Space separated names of animations to apply.
+         * @default false
+         */
+        animation?: string | boolean;
+        /**
+         * Animation duration in milliseconds.
+         * @default 200
+         */
+        duration?: number;
     }
     /**
-     * Create a toggleable dropdown with different styles
-     * Documentation: {@link http://getuikit.org/docs/dropdown.html}
+     * Defines different styles for a toggleable dropdown.
+     * Documentation: {@link https://getuikit.com/docs/dropdown}
      *
      * Events:
-     * Name               Description
-     * show.uk.dropdown   Triggered on dropdown show
-     * hide.uk.dropdown   Triggered on dropdown hide
-     * stack.uk.dropdown  Triggered when a dropdown stacks to fit into screen
+     * Name        Description
+     * toggle	     Fires before an item is toggled.
+     * beforeshow  Fires before an item is shown. Can prevent showing by calling preventDefault() on the event.
+     * show        Fires after an item is shown.
+     * shown       Fires after the item's show animation has completed.
+     * beforehide  Fires before an item is hidden. Can prevent hiding by calling preventDefault() on the event.
+     * hide        Fires after an item is hidden.
+     * hidden      Fires after an item is hidden.
+     * stack       Fires when the drop-stackclass is applied.
      */
-    type Dropdown = (selector: string|JQuery, options?: DropdownOptions) => DropdownElement;
+    type Dropdown = (element: string | HTMLElement, options?: DropdownOptions) => DropdownElement;
+
+    /**
+     * Modal element
+     */
     interface ModalElement {
         /**
-         * Show the modal
+         * Shows the Modal.
          */
-        show(): void;
+        show(): Promise;
         /**
-         * Hide the modal
+         * Hides the Modal.
          */
-        hide(): void;
+        hide(): Promise;
         /**
-         * Return if the modal is active on the page
-         * @return {boolean} True if the modal is current active on the page, false otherwise
+         * Toggle the Modal.
          */
-        isActive(): boolean;
+        toggle(): Promise;
     }
     interface ModalOptions {
         /**
-         * Allows controls from keyboard (ESC to close)
+         * Close the modal when the Esc key is pressed.
          * @default true
-         * <h2>Possible value</h2>
-         * boolean
          */
-        keyboard?: boolean;
+        escClose?: boolean;
         /**
-         * Allow modal to close automatically when clicking on the modal overlay
+         * Close the modal when the background is clicked.
          * @default true
-         * <h2>Possible value</h2>
-         * boolean
          */
-        bgclose?: boolean;
+        bgClose?: boolean;
         /**
-         * Set the height for overflow container to start scrolling
-         * @default 150
-         * <h2>Possible value</h2>
-         * integer
-         */
-        minScrollHeight?: number;
-        /**
-         * Vertically center the modal
+         * Stack modals, when more than one is open. By default, the previous modal will be hidden.
          * @default false
-         * <h2>Possible value</h2>
-         * boolean
          */
-        center?: boolean;
+        stack?: boolean;
         /**
-         * Close currently opened modals on opening modal
+         * Define a target container via a selector to specify where the modal should be appended in the DOM. Setting it to false will prevent this behavior.
          * @default true
-         * <h2>Possible value</h2>
-         * boolean
          */
-        modal?: boolean;
+        container?: string | boolean;
+        /**
+         * Class to add to <body> when modal is active
+         * @default 'uk-modal-page'
+         */
+        clsPage?: string;
+        /**
+         * Class of the element to be considered the panel of the modal
+         * @default 'uk-modal-dialog'
+         */
+        clsPanel?: string;
+        /**
+         * CSS selector for all elements that should trigger the closing of the modal
+         * @default '.uk-modal-close, .uk-modal-close-default, .uk-modal-close-outside, .uk-modal-close-full'
+         */
+        selClose?: string;
+        /**
+         * Labels
+         * @default {ok: 'Ok', cancel: 'Cancel'}
+         */
+        labels?: {
+          ok?: string;
+          cancel?: string;
+        }
     }
     /**
-     * Create modal dialogs with different styles and transitions
-     * Documentation: {@link http://getuikit.org/docs/modal.html}
+     * Create modal dialogs with different styles and transitions.
+     * Documentation: {@link https://getuikit.com/docs/modal}
      *
-     * <h2>Events</h2>
+     * Events:
+     * Name        Description
+     * beforeshow	 Fires before an item is shown.
+     * show        Fires after an item is shown.
+     * shown       Fires after the item's show animation has completed.
+     * beforehide  Fires before an item is hidden.
+     * hide        Fires after an item's hide animation has started.
+     * hidden      Fires after an item is hidden.
      *
-     * <table>
-     * <tr>
-     * <th>Name</th>
-     * <th>Parameter</th>
-     * <th>Description</th>
-     * </tr>
-     *
-     * <tr>
-     * <td><code>show.uk.modal</code></td>
-     * <td>event</td>
-     * <td>On modal show</td>
-     * </tr>
-     * <tr>
-     * <td><code>hide.uk.modal</code></td>
-     * <td>event</td>
-     * <td>On modal hide</td>
-     * </tr>
-     * </table>
      * @example
      * <pre><code>
-     * $('.modalSelector').on({
-     *     'show.uk.modal': function(){
-     *         console.log("Modal is visible.");
-     *     },
-     *
-     *     'hide.uk.modal': function(){
-     *         console.log("Element is not visible.");
-     *     }
-     * });
+     * UIkit.modal(element).show();
      * </code></pre>
      */
     interface Modal {
         /**
-         * Create a alert dialog
+         * Show an alert box with one button.
          * @param  {string} message The message to display. Can be Html
+         * @param  {ModalOptions} [options={bgClose: false, escClose: true, labels: {}}] The modal options
          */
-        alert(message: string): void;
+        alert(message: string, options?: ModalOptions): Promise;
         /**
-         * Create a confirm dialog
+         * Show a confirm dialog with your message and two buttons.
          * @param  {string} message The message to display. Can be Html
-         * @param  {ModalOptions} [options={bgclose: true, keyboard: false, modal: false}] The modal options
+         * @param  {ModalOptions} [options={bgClose: false, escClose: true, labels: {}}] The modal options
          */
-        confirm(message: string, options?: ModalOptions): void;
+        confirm(message: string, options?: ModalOptions): Promise;
         /**
-         * Create a confirm dialog and execute onconfirm on confirmation
-         * @param  {string} message The message to display. Can be Html
-         * @param  {function} onconfirm A function to execute on confirmation
-         * @param  {ModalOptions} [options={bgclose: true, keyboard: false, modal: false}] The modal options
-         */
-        confirm(message: string, onconfirm: () => any, options?: ModalOptions): void;
-        /**
-         * Create a confirm dialog and execute onconfirm on confirmation and oncancel on cancelation.
-         * @param  {string} message The message to display. Can be Html
-         * @param  {function} onconfirm A function to execute on confirmation
-         * @param  {function} oncancel A function to execute on cancelation
-         * @param  {ModalOptions} [options={bgclose: true, keyboard: false, modal: false}] The modal options
-         */
-        confirm(message: string, onconfirm: () => any, oncancel?: () => any, options?: ModalOptions): void;
-        /**
-         * Create a prompt dialog, where the user enter information
+         * Show a dialog asking for a text input.
          * @param  {string} message The message to display. Can be Html
          * @param  {string} value   A value to init the input
-         * @param  {function} fn  A function to execute on submission. The function receive the new value as a parameter
-         * @param  {ModalOptions} [options={bgclose: true, keyboard: false, modal: false}] The modal options
+         * @param  {ModalOptions} [options={bgClose: false, escClose: true, labels: {}}] The modal options
          */
-        prompt(message: string, value: string, onsubmit?: (newValue: string) => any, options?: ModalOptions): void;
+        prompt(message: string, value: string, options?: ModalOptions): Promise<string | null>;
         /**
-         * Create a modal that blocks the entire page
-         * @param {string} content A content to display. Can be Html
-         * @param  {ModalOptions} [options={bgclose: true, keyboard: false, modal: false}] The modal options
+         * Show dialog with any HTML content.
+         * @param {string} message       The message to display. Can be Html
+         * @param {ModalOptions} options The modal options
          */
-        blockUI(content: string, options?: ModalOptions): ModalElement;
+        dialog(message: string, options?: ModalOptions): Modal;
         /**
          * Select a modal element on page and return it.
          * @example
          * <pre><code>
          * var modal = UIkit.modal(".modalSelector");
-         *
-         * if ( modal.isActive() ) {
-         *   modal.hide();
-         *   } else {
-         *   modal.show();
-         * }
+         * modal.show();
          * </code></pre>
          */
-        (selector: string|JQuery, options?: ModalOptions): ModalElement;
+        (element: HTMLElement | string, options?: ModalOptions): ModalElement;
     }
+
     /**
      * Create a smooth off-canvas sidebar that slides in and out of the page
      * Documentation: {@link http://getuikit.org/docs/offcanvas.html}
@@ -1337,7 +1324,7 @@ declare namespace UIkit {
          * <h2>Possible value</h2>
          * integer
          */
-            filelimit?: number;
+        filelimit?: number;
         /**
          * Response type from server
          * @default text
