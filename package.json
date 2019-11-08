@@ -1,0 +1,34 @@
+{
+  "name": "@piotr-cz/types-uikit-v3",
+  "version": "3.2.3-alpha.1",
+  "description": "cript definitions for UIkit v3",
+  "contributors": [
+    {
+      "name": "Giovanni Silva",
+      "url": "https://github.com/giovannicandido"
+    },
+    {
+      "name": "Ivo Senner",
+      "url": "https://github.com/s0x"
+    },
+    {
+      "name": "Talalaev Mikhail",
+      "url": "https://github.com/talalaev"
+    },
+    {
+      "name": "Piotr Konieczny",
+      "url": "https://github.com/piotr-cz"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "UIKit"
+  ],
+  "main": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piotr-cz/types-uikit-v3.git",
+  },
+  "scripts": {},
+  "typeScriptVersion": "2.3"
+}
