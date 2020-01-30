@@ -312,7 +312,7 @@ declare namespace UIkit {
        * Define a target container via a selector to specify where the off-canvas should be appended in the DOM. Setting it to false will prevent this behavior.
        * @default false
        */
-      container?: string | boolean;
+      container?: string | HTMLElement | boolean;
     }
 
     interface LightBoxOptions {
