@@ -276,6 +276,12 @@ declare namespace UIkit {
         hide(): Promise;
     }
 
+    type OffCanvasMode =
+      'slide' |
+      'reveal' |
+      'push' |
+      'none';
+
     interface OffCanvasOptions {
       /**
        * Off-canvas animation mode: `slide`, `reveal`, `push` or `none`.
@@ -308,8 +314,6 @@ declare namespace UIkit {
        */
       container?: string | boolean;
     }
-
-    type OffCanvasMode = 'slide' | 'reveal' | 'push' | 'none'
 
     interface LightBoxOptions {
         /**
