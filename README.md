@@ -6,7 +6,7 @@ This package contains type definitions for UIkit v3 (https://getuikit.com).
 
 # Details
 
-## Ported components:
+## Ported components
 
 Component    | Ported | Documentation
 -------------|:------:|--------------
@@ -45,6 +45,13 @@ Tooltip      | -      | https://getuikit.com/docs/tooltip
 Totop        | -      | https://getuikit.com/docs/totop
 Upload       | -      | https://getuikit.com/docs/upload
 Video        | -      | https://getuikit.com/docs/video
+
+# Others
+
+Property    | Ported | Documentation
+------------|:------:|--------------
+api/global  | x      | `use`, `mixin`, `extend`, `update`
+util/event  | x      | `on`, `off`, `once`...
 
 # Credits
 

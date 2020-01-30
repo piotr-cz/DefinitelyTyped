@@ -1464,6 +1464,29 @@ declare namespace UIkit {
      * </table>
      */
     type Upload = (element: string|JQuery, options: UploadOptions) => any;
+
+    type UtilEventTargets =
+      string |
+      string[] |
+      HTMLELement |
+      HTMLElement[] |
+      NodeList |
+      NodeList[] |
+      HTMLCollection |
+      HTMLCollection[];
+
+    interface Util {
+      on(targets: UtilEventTargets, type: string, listener: function): Util.off;
+      on(targets: UtilEventTargets, type: string, selector: string, listener: function, useCapture?: boolean = false): Uti.off;
+      once(targets: UtilEventTargets, type: string, selector: string, listener: function, useCapture?: boolean = false, condition?: function): Util.off;
+      once(targets: UtilEventTargets, type: string, listener: function): Util.off;
+      off(targets: UtilEventTargets, type: string, listener: function, useCapture?: boolean = false): void;
+      trigger(targets: UtilEventTargets, type: string, detail?: object = null): boolean
+      createEvent(type: string | CustomEvent, bubbles?: boolean = true, cancelable?: boolean = true, detail?: object = null): CustomEvent
+      isTouch(event: Event): boolean
+      getEventPos(event: Event, prop?: string = 'client'): {x: number, y: number};
+    }
+
     const dropdown: Dropdown;
     const modal: Modal;
     const lightbox: LightBox;
@@ -1485,6 +1508,35 @@ declare namespace UIkit {
     const tooltip: Tooltip;
     const uploadSelect: Upload;
     const uploadDrop: Upload;
+    const util: Util;
+
+    /**
+     * Register plugin
+     * @param {function} plugin
+     * @return {UIkit}
+     */
+    const use: (plugin: function) => UIkit
+
+    /**
+     * Globally change component options by extending a component.
+     * @param {object} mixin
+     * @param {string|object} component
+     */
+    const mixin: (mixin: object, component: string | object) => void;
+
+    /**
+     * Extend component options.
+     * @param {object} mixin
+     * @param {string|object} component
+     */
+    const extend: (mixin: object, component: string | object) => void;
+
+    /**
+     * Call the update hook on components registered on the element itself, its parents and children.
+     * @param {HTMLElement} [element] - Defaults to `document.body`
+     * @param {string} [type="update"] - Update type
+     */
+    const update: (element?: HTMLElement, string?: e = 'update') => void;
 }
 
 type fn = (arg: any) => any;
