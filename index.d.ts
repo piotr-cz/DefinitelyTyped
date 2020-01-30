@@ -227,41 +227,90 @@ declare namespace UIkit {
     }
 
     /**
-     * Create a smooth off-canvas sidebar that slides in and out of the page
+     * Create an off-canvas sidebar that slides in and out of the page, which is perfect for creating mobile navigations.
      * Documentation: {@link http://getuikit.org/docs/offcanvas.html}
      * <h2>Events:</h2>
      * <table class="uk-table uk-table-striped uk-text-nowrap">
      * <tr>
      * <th>Name</th>
-     * <th>Parameter</th>
      * <th>Description</th>
      * </tr>
      * <tr>
-     * <td><code>show.uk.offcanvas</code></td>
-     * <td>event, panel, bar</td>
-     * <td>On offcanvas show</td>
+     * <td><code>beforeshow</code></td>
+     * <td>Fires before an item is shown.</td>
      * </tr>
      * <tr>
-     * <td><code>hide.uk.offcanvas</code></td>
-     * <td>event, panel, bar</td>
-     * <td>On offcanvas hide</td>
+     * <td><code>show</code></td>
+     * <td>Fires after an item is shown.</td>
+     * </tr>
+     * <tr>
+     * <td><code>shown</code></td>
+     * <td>Fires after the item's show animation has completed.</td>
+     * </tr>
+     * <tr>
+     * <td><code>beforehide</code></td>
+     * <td>Fires before an item is hidden.</td>
+     * </tr>
+     * <tr>
+     * <td><code>hide</code></td>
+     * <td>Fires after an item's hide animation has started.</td>
+     * </tr>
+     * <tr>
+     * <td><code>hidden</code></td>
+     * <td>Fires after an item is hidden.</td>
      * </tr>
      * </table>
      */
     interface OffCanvas {
         /**
-         * Show an off-canvas matching the passed CSS selector
-         * @param  {string} selector A CSS selector
+         * Initialization
          */
-        show(selector: string): void;
+        (element: string|HTMLElement, options?: OffCanvasOptions): OffCanvas
         /**
-         * Hide any active offcanvas. Set force to true, if you don't want any
-         * animation
-         * @param  {boolean} force When seted to true do not run animations.
-         * @default false
+         * Shows the Offcanvas.
          */
-        hide(force?: boolean): void;
+        show(): Promise;
+        /**
+         * Hides the Offcanvas.
+         */
+        hide(): Promise;
     }
+
+    interface OffCanvasOptions {
+      /**
+       * Off-canvas animation mode: `slide`, `reveal`, `push` or `none`.
+       * @default 'slide''
+       */
+      mode?: OffCanvasMode;
+      /**
+       * Flip off-canvas to the right side.
+       * @default false
+       */
+      flip?: boolean;
+      /**
+       * Display the off-canvas together with an overlay.
+       * @default false
+       */
+      overlay?: boolean;
+      /**
+       * Close the off-canvas when the <kbd>Esc</kbd> key is pressed.
+       * @default true
+       */
+      escClose?: boolean;
+      /**
+       * Close the off-canvas when the background is clicked.
+       * @default true
+       */
+      bgClose?: boolean;
+      /**
+       * Define a target container via a selector to specify where the off-canvas should be appended in the DOM. Setting it to false will prevent this behavior.
+       * @default false
+       */
+      container?: string | boolean;
+    }
+
+    type OffCanvasMode = 'slide' | 'reveal' | 'push' | 'none'
+
     interface LightBoxOptions {
         /**
          * Group name to group elements as a gallery to show.

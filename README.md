@@ -29,7 +29,7 @@ Modal        | x      | https://getuikit.com/docs/modal
 Nav          | -      | https://getuikit.com/docs/nav
 Navbar       | -      | https://getuikit.com/docs/navbar
 Notification | -      | https://getuikit.com/docs/notification
-Off-canvas   | -      | https://getuikit.com/docs/offcanvas
+Off-canvas   | x      | https://getuikit.com/docs/offcanvas
 Parallax     | -      | https://getuikit.com/docs/parallax
 Scroll       | -      | https://getuikit.com/docs/scroll
 Scrollspy    | -      | https://getuikit.com/docs/scrollspy
