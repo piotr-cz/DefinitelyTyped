@@ -1,3 +1,5 @@
+⚠ This package is no longer maintained since the [@types/uikit](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/uikit) package is now updated to UIkit v3 ⚠
+
 # Installation
 > `npm install --save @piotr-cz/types-uikit-v3`
 
